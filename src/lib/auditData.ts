@@ -189,14 +189,12 @@ export const createAuditData = (input: AuditInput): AuditData => ({
       }))
     },
     quickWins: [
-      "Add FAQPage schema for all key questions",
-      "Submit XML sitemap and fix crawling issues",
-      "Improve mobile speed by optimizing images",
-      "Enhance content for top treatment questions",
-      "Increase internal linking between resources",
-      "Update alt attributes for all images",
-      "Add rich snippets for key content",
-      "Monitor AI/LLM citations monthly"
+      "AI SEO Technical fixes:",
+      "Unblock crawl/snippets via robots.txt and robots/meta.",
+      "Add precise Schema.org structured data on key templates.",
+      "Fix canonical/hreflang so the right URL/locale indexes.",
+      "Keep XML sitemaps accurate (lastmod) and strengthen internal links.",
+      "Improve Core Web Vitals (LCP, INP, CLS) and server responsiveness."
     ],
     forecast: {
       currentTraffic: Array.from({ length: 6 }, () => Math.floor(Math.random() * 300) + 1000),
