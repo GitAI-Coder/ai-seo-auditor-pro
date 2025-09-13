@@ -216,7 +216,7 @@ const SettingsDialog: React.FC<SettingsDialogProps> = ({
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email-recipients">Recipients</Label>
+                <Label htmlFor="email-recipients">Recipients *</Label>
                 <Input
                   id="email-recipients"
                   placeholder="Enter email addresses (comma-separated)"
@@ -227,7 +227,11 @@ const SettingsDialog: React.FC<SettingsDialogProps> = ({
                       e.target.value.split(',').map(email => email.trim()).filter(Boolean)
                     )
                   }
+                  required
                 />
+                <p className="text-xs text-muted-foreground">
+                  Please provide at least one email address to receive notifications
+                </p>
               </div>
 
               <div className="flex items-center justify-between">

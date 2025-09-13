@@ -233,9 +233,9 @@ export const createAuditData = (input: AuditInput): AuditData => ({
   },
   settings: {
     mailNotifications: {
-      enabled: true,
+      enabled: false,
       frequency: ["weekly", "monthly"],
-      recipients: [`admin@${input.website.replace(/https?:\/\//, '')}`],
+      recipients: [],
       attachAuditFile: true
     },
     downloadOption: true,
