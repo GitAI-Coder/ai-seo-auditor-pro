@@ -209,6 +209,100 @@ const Dashboard = () => {
               </Card>
             </div>
 
+            {/* Citations Profile */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Citations Profile</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* DR Score Donut */}
+                  <div className="text-center">
+                    <ResponsiveContainer width="100%" height={120}>
+                      <PieChart>
+                        <Pie
+                          data={[
+                            { name: "DR", value: 7 },
+                            { name: "Remaining", value: 93 }
+                          ]}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius={35}
+                          outerRadius={50}
+                          startAngle={90}
+                          endAngle={450}
+                          dataKey="value"
+                        >
+                          <Cell fill="hsl(var(--primary))" />
+                          <Cell fill="hsl(var(--muted))" />
+                        </Pie>
+                      </PieChart>
+                    </ResponsiveContainer>
+                    <div className="mt-2">
+                      <div className="text-2xl font-bold text-primary">7</div>
+                      <div className="text-sm text-muted-foreground">DR Score</div>
+                    </div>
+                  </div>
+
+                  {/* Backlinks Donut */}
+                  <div className="text-center">
+                    <ResponsiveContainer width="100%" height={120}>
+                      <PieChart>
+                        <Pie
+                          data={[
+                            { name: "Backlinks", value: 791 },
+                            { name: "Remaining", value: 209 }
+                          ]}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius={35}
+                          outerRadius={50}
+                          startAngle={90}
+                          endAngle={450}
+                          dataKey="value"
+                        >
+                          <Cell fill="hsl(var(--accent))" />
+                          <Cell fill="hsl(var(--muted))" />
+                        </Pie>
+                      </PieChart>
+                    </ResponsiveContainer>
+                    <div className="mt-2">
+                      <div className="text-2xl font-bold text-accent">791</div>
+                      <div className="text-sm text-muted-foreground">Backlinks</div>
+                    </div>
+                  </div>
+
+                  {/* Referring Domains Donut */}
+                  <div className="text-center">
+                    <ResponsiveContainer width="100%" height={120}>
+                      <PieChart>
+                        <Pie
+                          data={[
+                            { name: "Domains", value: 20 },
+                            { name: "Remaining", value: 80 }
+                          ]}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius={35}
+                          outerRadius={50}
+                          startAngle={90}
+                          endAngle={450}
+                          dataKey="value"
+                        >
+                          <Cell fill="hsl(var(--secondary))" />
+                          <Cell fill="hsl(var(--muted))" />
+                        </Pie>
+                      </PieChart>
+                    </ResponsiveContainer>
+                    <div className="mt-2">
+                      <div className="text-2xl font-bold text-secondary">20</div>
+                      <div className="text-sm text-muted-foreground">Ref. Domains</div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Quick Wins */}
             <Card>
               <CardHeader>
