@@ -171,7 +171,7 @@ export const createAuditData = (input: AuditInput): AuditData => ({
     }, {} as Record<string, SEOIssue[]>),
     aiVisibility: {
       comparison: [
-        { domain: input.website, citations: Math.floor(Math.random() * 30) + 15, SERP_mentions: Math.floor(Math.random() * 40) + 20 },
+        { domain: input.website, citations: 3, SERP_mentions: Math.floor(Math.random() * 40) + 20 },
         ...input.competitors.map(competitor => ({
           domain: competitor,
           citations: Math.floor(Math.random() * 50) + 25,
@@ -180,7 +180,7 @@ export const createAuditData = (input: AuditInput): AuditData => ({
       ],
       topQuestionsPerformance: input.targetQuestions.slice(0, 5).map((question, index) => ({
         question,
-        rnaiscience: { rank: Math.floor(Math.random() * 5) + 3, citations: Math.floor(Math.random() * 3) + 1 },
+        rnaiscience: { rank: Math.floor(Math.random() * 5) + 3, citations: 3 },
         topCompetitor: { 
           domain: input.competitors[index % input.competitors.length] || input.competitors[0],
           rank: Math.floor(Math.random() * 2) + 1,
