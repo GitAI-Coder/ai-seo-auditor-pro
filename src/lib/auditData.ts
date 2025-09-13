@@ -288,3 +288,19 @@ export const clearAuditData = (): void => {
     console.error('Failed to clear audit data:', error);
   }
 };
+
+export const updateAuditSettings = (settings: any): void => {
+  const currentData = getLatestAuditData();
+  const updatedData = {
+    ...currentData,
+    settings: {
+      ...currentData.settings,
+      ...settings,
+    },
+    meta: {
+      ...currentData.meta,
+      lastUpdated: new Date().toISOString(),
+    },
+  };
+  saveAuditData(updatedData);
+};

@@ -20,14 +20,16 @@ import {
   Download, Settings, Bell, ExternalLink, Search, Target,
   Users, Globe, MessageSquare, Zap, Award, ArrowUp, Plus, ChevronDown
 } from "lucide-react";
-import { getLatestAuditData, type AuditData } from "@/lib/auditData";
+import { getLatestAuditData, updateAuditSettings, type AuditData } from "@/lib/auditData";
 import { useReportDownload } from "@/hooks/useReportDownload";
+import { NotificationsDialog } from "@/components/NotificationsDialog";
 
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
   const [auditData, setAuditData] = useState<AuditData | null>(null);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
   const { downloadReport, isDownloading } = useReportDownload();
 
   useEffect(() => {
@@ -45,6 +47,13 @@ const Dashboard = () => {
     }
     setAuditData(data);
   }, [navigate]);
+
+  const handleSettingsUpdate = (settings: any) => {
+    updateAuditSettings(settings);
+    // Refresh the audit data to reflect the changes
+    const updatedData = getLatestAuditData();
+    setAuditData(updatedData);
+  };
 
   const getImpactColor = (impact: string) => {
     switch (impact) {
@@ -90,7 +99,11 @@ const Dashboard = () => {
                 New Audit
               </Button>
             </Link>
-            <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+            <Button 
+              variant="outline" 
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+              onClick={() => setNotificationsOpen(true)}
+            >
               <Bell className="h-4 w-4 mr-2" />
               Notifications
             </Button>
@@ -572,6 +585,13 @@ const Dashboard = () => {
           </TabsContent>
         </Tabs>
       </div>
+
+      <NotificationsDialog
+        open={notificationsOpen}
+        onOpenChange={setNotificationsOpen}
+        auditData={auditData}
+        onSettingsUpdate={handleSettingsUpdate}
+      />
     </div>
   );
 };
