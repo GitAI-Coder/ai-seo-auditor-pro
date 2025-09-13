@@ -218,7 +218,7 @@ const Dashboard = () => {
             {/* Citations Profile */}
             <Card>
               <CardHeader>
-                <CardTitle>Citations Profile</CardTitle>
+                <CardTitle>Backlink Profile</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
