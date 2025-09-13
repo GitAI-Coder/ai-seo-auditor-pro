@@ -36,6 +36,12 @@ export interface QuestionPerformance {
   topCompetitor: { domain: string; rank: number; citations: number };
 }
 
+export interface CitationsProfile {
+  dr: number;
+  backlinks: number;
+  refDomains: number;
+}
+
 export interface AuditData {
   input: AuditInput;
   audit: {
@@ -43,6 +49,7 @@ export interface AuditData {
     aiCitationScore: number;
     criticalIssues: number;
     trafficTrend: number[];
+    citationsProfile: CitationsProfile;
     opportunityGaps: OpportunityGap[];
     seoIssues: SEOIssue[];
     competitorSeoIssues: Record<string, SEOIssue[]>;
@@ -82,6 +89,11 @@ export const createAuditData = (input: AuditInput): AuditData => ({
     aiCitationScore: Math.floor(Math.random() * 40) + 50, // 50-89
     criticalIssues: Math.floor(Math.random() * 15) + 3, // 3-17
     trafficTrend: [74, 74, 133, 108, 157, 135, 125, 113],
+    citationsProfile: {
+      dr: 7,
+      backlinks: 791,
+      refDomains: 20
+    },
     opportunityGaps: [
       {
         issue: "Missing FAQ schema for key questions",

@@ -29,6 +29,12 @@ const Dashboard = () => {
       navigate("/audit");
       return;
     }
+    // Clear old data to refresh with new structure
+    if (!data.audit.citationsProfile) {
+      localStorage.removeItem('aiseo_audit_data');
+      navigate("/audit");
+      return;
+    }
     setAuditData(data);
   }, [navigate]);
 
@@ -222,8 +228,8 @@ const Dashboard = () => {
                       <PieChart>
                         <Pie
                           data={[
-                            { name: "DR", value: 7 },
-                            { name: "Remaining", value: 93 }
+                            { name: "DR", value: auditData.audit.citationsProfile.dr },
+                            { name: "Remaining", value: 100 - auditData.audit.citationsProfile.dr }
                           ]}
                           cx="50%"
                           cy="50%"
@@ -239,7 +245,7 @@ const Dashboard = () => {
                       </PieChart>
                     </ResponsiveContainer>
                     <div className="mt-2">
-                      <div className="text-2xl font-bold text-primary">7</div>
+                      <div className="text-2xl font-bold text-primary">{auditData.audit.citationsProfile.dr}</div>
                       <div className="text-sm text-muted-foreground">DR Score</div>
                     </div>
                   </div>
@@ -250,8 +256,8 @@ const Dashboard = () => {
                       <PieChart>
                         <Pie
                           data={[
-                            { name: "Backlinks", value: 791 },
-                            { name: "Remaining", value: 209 }
+                            { name: "Backlinks", value: auditData.audit.citationsProfile.backlinks },
+                            { name: "Remaining", value: Math.max(1000 - auditData.audit.citationsProfile.backlinks, 0) }
                           ]}
                           cx="50%"
                           cy="50%"
@@ -267,7 +273,7 @@ const Dashboard = () => {
                       </PieChart>
                     </ResponsiveContainer>
                     <div className="mt-2">
-                      <div className="text-2xl font-bold text-accent">791</div>
+                      <div className="text-2xl font-bold text-accent">{auditData.audit.citationsProfile.backlinks}</div>
                       <div className="text-sm text-muted-foreground">Backlinks</div>
                     </div>
                   </div>
@@ -278,8 +284,8 @@ const Dashboard = () => {
                       <PieChart>
                         <Pie
                           data={[
-                            { name: "Domains", value: 20 },
-                            { name: "Remaining", value: 80 }
+                            { name: "Domains", value: auditData.audit.citationsProfile.refDomains },
+                            { name: "Remaining", value: Math.max(100 - auditData.audit.citationsProfile.refDomains, 0) }
                           ]}
                           cx="50%"
                           cy="50%"
@@ -295,7 +301,7 @@ const Dashboard = () => {
                       </PieChart>
                     </ResponsiveContainer>
                     <div className="mt-2">
-                      <div className="text-2xl font-bold text-secondary">20</div>
+                      <div className="text-2xl font-bold text-secondary">{auditData.audit.citationsProfile.refDomains}</div>
                       <div className="text-sm text-muted-foreground">Ref. Domains</div>
                     </div>
                   </div>
