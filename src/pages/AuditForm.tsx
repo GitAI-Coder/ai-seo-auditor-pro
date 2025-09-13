@@ -95,9 +95,9 @@ const AuditForm = () => {
       description: "Your SEO audit data has been generated and saved!",
     });
 
-    // Navigate to dashboard
+    // Navigate to progress screen
     setTimeout(() => {
-      navigate("/dashboard");
+      navigate("/audit/progress");
     }, 1000);
   };
 
