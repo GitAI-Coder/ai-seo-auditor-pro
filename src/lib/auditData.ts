@@ -122,28 +122,64 @@ export const createAuditData = (input: AuditInput): AuditData => ({
     ],
     seoIssues: [
       {
-        issue: "Mobile site speed is below industry benchmark",
-        page: "/",
+        issue: "Missing biomedical structured data",
+        page: "/alnylam-rnai",
         impact: "High",
-        recommendation: "Enable caching, optimize images, and reduce JS payload"
+        recommendation: "Add JSON-LD (Organization, MedicalEntity/Drug, ScholarlyArticle) with citations, sameAs IDs, and in-page identifiers for precise entity extraction."
       },
       {
-        issue: "No XML sitemap found",
+        issue: "Clinical trial schema absent",
+        page: "/pipeline-clinical-trials",
+        impact: "High",
+        recommendation: "Implement ClinicalTrial schema (phase, condition, intervention, status, registry IDs, locations) to improve LLM retrieval and SERP rich results."
+      },
+      {
+        issue: "No LLM-friendly summaries",
         page: "/",
         impact: "Medium",
-        recommendation: "Generate and submit an XML sitemap to Google Search Console"
+        recommendation: "Add concise \"Key Takeaways\" and a Q&A block with fact-checked bullets and definitions to aid snippet/LLM comprehension."
       },
       {
-        issue: "Missing alt attributes for images",
-        page: "/resources",
+        issue: "AI crawler access not configured",
+        page: "/",
         impact: "Medium",
-        recommendation: "Add descriptive alt text for accessibility and SEO"
+        recommendation: "Review robots.txt and meta directives to explicitly allow or disallow GPTBot, Google-Extended, and PerplexityBot per policy, and log bot hits."
       },
       {
-        issue: "Title tags are missing for some pages",
-        page: "/subpages",
+        issue: "Publications are PDF-only",
+        page: "/congresses-publications",
+        impact: "Medium",
+        recommendation: "Publish HTML abstracts and metadata pages for each item with open graph, citation lists, and DOI links to maximize crawlability."
+      },
+      {
+        issue: "Weak internal linking to entities",
+        page: "/therapeutic-areas",
+        impact: "Medium",
+        recommendation: "Build hub-and-spoke links to conditions, mechanisms, and trials using descriptive anchors and add BreadcrumbList schema."
+      },
+      {
+        issue: "Missing author and reviewer metadata",
+        page: "/alnylam-rnai",
+        impact: "Medium",
+        recommendation: "Add author bios, medical reviewer credentials, \"last reviewed\" dates, and Article schema fields (author, reviewer, medicalSpecialty)."
+      },
+      {
+        issue: "Ambiguous headings and synonyms",
+        page: "/therapeutic-areas",
         impact: "Low",
-        recommendation: "Add unique, keyword-rich title tags"
+        recommendation: "Standardize H1/H2 with the primary term plus common synonyms/acronyms to improve entity disambiguation for LLMs."
+      },
+      {
+        issue: "FAQ schema not implemented",
+        page: "/",
+        impact: "Low",
+        recommendation: "Add FAQPage schema with concise, cited answers to common HCP/patient queries to fuel rich results and LLM grounding."
+      },
+      {
+        issue: "Sitemap lacks content segmentation",
+        page: "/congresses-publications",
+        impact: "Low",
+        recommendation: "Create a sitemap index with separate sitemaps for publications, clinical trials, and therapeutic areas including lastmod and hreflang."
       }
     ],
     competitorSeoIssues: input.competitors.reduce((acc, competitor) => {
