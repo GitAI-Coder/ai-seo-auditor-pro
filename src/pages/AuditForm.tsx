@@ -198,7 +198,7 @@ const AuditForm = () => {
                 <div className="flex items-center justify-between">
                   <Label className="flex items-center text-base font-medium">
                     <MessageSquare className="h-4 w-4 mr-2 text-primary" />
-                    Target Questions * (minimum 10)
+                    Target Questions (minimum 10)
                   </Label>
                   <Badge variant="outline" className="text-xs">
                     {formData.targetQuestions.filter(q => q.trim()).length}/10 minimum
@@ -244,7 +244,7 @@ const AuditForm = () => {
               <div className="space-y-4">
                 <Label className="flex items-center text-base font-medium">
                   <Building2 className="h-4 w-4 mr-2 text-primary" />
-                  Competitors *
+                  Competitors
                 </Label>
                 <p className="text-sm text-muted-foreground">
                   Add competitor websites (one per line) to compare your AI visibility and SEO performance.
