@@ -314,7 +314,7 @@ const Dashboard = () => {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Zap className="h-5 w-5 mr-2 text-warning" />
-                  Quick Wins
+                  AI SEO Technical fixes:
                 </CardTitle>
               </CardHeader>
               <CardContent>

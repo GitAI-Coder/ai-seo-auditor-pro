@@ -189,7 +189,6 @@ export const createAuditData = (input: AuditInput): AuditData => ({
       }))
     },
     quickWins: [
-      "AI SEO Technical fixes:",
       "Unblock crawl/snippets via robots.txt and robots/meta.",
       "Add precise Schema.org structured data on key templates.",
       "Fix canonical/hreflang so the right URL/locale indexes.",
