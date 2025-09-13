@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,134 +14,23 @@ import {
   Download, Settings, Bell, ExternalLink, Search, Target,
   Users, Globe, MessageSquare, Zap, Award, ArrowUp
 } from "lucide-react";
+import { getLatestAuditData, type AuditData } from "@/lib/auditData";
 
-// Mock data based on the JSON structure provided
-const mockAuditData = {
-  "input": {
-    "website": "rnaiscience.com",
-    "region": "United States",
-    "audience": "Healthcare Professional (HCP)",
-    "targetQuestions": [
-      "What is RNA interference (RNAi), and how does it work?",
-      "What are current best practices for diagnosing hereditary ATTR amyloidosis?",
-      "Where can healthcare professionals find educational tools on RNAi therapies?",
-      "List ongoing clinical trials involving RNA interference for rare diseases.",
-      "Show recent congress updates or publications about RNAi in amyloidosis.",
-      "Download patient education resources for RNAi-based therapies.",
-      "How can HCPs connect with scientific liaisons for information about RNAi?",
-      "List diagnostic aids available for rare cardiomyopathies.",
-      "Share recent case studies about RNAi therapies in the United States.",
-      "What is the process for reporting adverse events related to RNAi therapies?"
-    ],
-    "competitors": [
-      "pfizermedical.pfizerpro.com",
-      "ionispharma.com",
-      "medicalinformation.astrazeneca-us.com",
-      "scientific-exchange.com"
-    ]
-  },
-  "audit": {
-    "seoScore": 74,
-    "aiCitationScore": 61,
-    "criticalIssues": 8,
-    "trafficTrend": [1200, 1250, 1230, 1180, 1300, 1350],
-    "opportunityGaps": [
-      {
-        "issue": "Missing FAQ schema for key RNAi questions",
-        "page": "/faq/rnai",
-        "impact": "High",
-        "effort": "Low",
-        "recommendation": "Add FAQ Structured Data for all RNAi questions",
-        "quickWin": true
-      },
-      {
-        "issue": "Brand does not appear in AI/LLM citations for 'hereditary ATTR amyloidosis'",
-        "page": "/conditions/amyloidosis",
-        "impact": "High",
-        "effort": "Medium",
-        "recommendation": "Optimize pages for AI visibility with targeted content and structured data",
-        "quickWin": false
-      },
-      {
-        "issue": "Competitors ranking for 'RNAi clinical trials'",
-        "page": "/clinical-trials/rnai",
-        "impact": "Medium",
-        "effort": "Medium",
-        "recommendation": "Add regularly updated clinical trials widget and optimize metadata",
-        "quickWin": false
-      }
-    ],
-    "seoIssues": [
-      {
-        "issue": "Mobile site speed is below industry benchmark.",
-        "page": "/",
-        "impact": "High",
-        "recommendation": "Enable caching, optimize images, and reduce JS payload."
-      },
-      {
-        "issue": "No XML sitemap found.",
-        "page": "/",
-        "impact": "Medium",
-        "recommendation": "Generate and submit an XML sitemap to Google Search Console."
-      },
-      {
-        "issue": "Missing alt attributes for images in patient education resources.",
-        "page": "/education/patient-resources",
-        "impact": "Medium",
-        "recommendation": "Add descriptive alt text for accessibility and SEO."
-      },
-      {
-        "issue": "Title tags are missing for some clinical trials subpages.",
-        "page": "/clinical-trials/",
-        "impact": "Low",
-        "recommendation": "Add unique, keyword-rich title tags."
-      }
-    ],
-    "aiVisibility": {
-      "comparison": [
-        { "domain": "rnaiscience.com", "citations": 23, "SERP_mentions": 27 },
-        { "domain": "pfizermedical.pfizerpro.com", "citations": 43, "SERP_mentions": 51 },
-        { "domain": "ionispharma.com", "citations": 40, "SERP_mentions": 47 },
-        { "domain": "medicalinformation.astrazeneca-us.com", "citations": 32, "SERP_mentions": 33 },
-        { "domain": "scientific-exchange.com", "citations": 30, "SERP_mentions": 38 }
-      ],
-      "topQuestionsPerformance": [
-        {
-          "question": "What is RNA interference (RNAi), and how does it work?",
-          "rnaiscience": {"rank": 3, "citations": 2},
-          "topCompetitor": {"domain": "ionispharma.com", "rank": 1, "citations": 6}
-        },
-        {
-          "question": "Where can healthcare professionals find educational tools on RNAi therapies?",
-          "rnaiscience": {"rank": 4, "citations": 1},
-          "topCompetitor": {"domain": "pfizermedical.pfizerpro.com", "rank": 1, "citations": 5}
-        },
-        {
-          "question": "What are current best practices for diagnosing hereditary ATTR amyloidosis?",
-          "rnaiscience": {"rank": 5, "citations": 1},
-          "topCompetitor": {"domain": "medicalinformation.astrazeneca-us.com", "rank": 1, "citations": 4}
-        }
-      ]
-    },
-    "quickWins": [
-      "Add FAQPage schema for all key questions on RNAi and amyloidosis.",
-      "Submit XML sitemap and fix crawling issues.",
-      "Improve mobile speed by optimizing images and deferring non-critical JS.",
-      "Enhance content for top 3 non-branded treatment questions.",
-      "Increase internal linking between patient resources and HCP landing pages.",
-      "Update alt attributes for all education resource images.",
-      "Add rich snippets for clinical trials and recent case studies.",
-      "Monitor AI/LLM citations every month for new questions and topics."
-    ],
-    "forecast": {
-      "currentTraffic": [1200, 1250, 1230, 1180, 1300, 1350],
-      "projectedUplift": [1280, 1340, 1400, 1460, 1550, 1630]
-    }
-  }
-};
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
+  const [auditData, setAuditData] = useState<AuditData | null>(null);
+
+  useEffect(() => {
+    const data = getLatestAuditData();
+    if (!data) {
+      // Redirect to audit form if no data found
+      navigate("/audit");
+      return;
+    }
+    setAuditData(data);
+  }, [navigate]);
 
   const getImpactColor = (impact: string) => {
     switch (impact) {
@@ -150,6 +40,18 @@ const Dashboard = () => {
       default: return "outline";
     }
   };
+
+  if (!auditData) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <Search className="h-12 w-12 mx-auto mb-4 text-primary" />
+          <h2 className="text-2xl font-bold mb-2">Loading Audit Data...</h2>
+          <p className="text-muted-foreground">Please wait while we load your audit results.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -191,8 +93,8 @@ const Dashboard = () => {
               <Award className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-primary">{mockAuditData.audit.seoScore}/100</div>
-              <Progress value={mockAuditData.audit.seoScore} className="mt-2" />
+              <div className="text-2xl font-bold text-primary">{auditData.audit.seoScore}/100</div>
+              <Progress value={auditData.audit.seoScore} className="mt-2" />
             </CardContent>
           </Card>
 
@@ -202,8 +104,8 @@ const Dashboard = () => {
               <Target className="h-4 w-4 text-accent" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-accent">{mockAuditData.audit.aiCitationScore}/100</div>
-              <Progress value={mockAuditData.audit.aiCitationScore} className="mt-2" />
+              <div className="text-2xl font-bold text-accent">{auditData.audit.aiCitationScore}/100</div>
+              <Progress value={auditData.audit.aiCitationScore} className="mt-2" />
             </CardContent>
           </Card>
 
@@ -213,7 +115,7 @@ const Dashboard = () => {
               <AlertTriangle className="h-4 w-4 text-destructive" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-destructive">{mockAuditData.audit.criticalIssues}</div>
+              <div className="text-2xl font-bold text-destructive">{auditData.audit.criticalIssues}</div>
               <p className="text-xs text-muted-foreground mt-1">
                 Require immediate attention
               </p>
@@ -254,13 +156,13 @@ const Dashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
-                    <AreaChart data={mockAuditData.audit.trafficTrend.map((value, index) => ({ month: `Month ${index + 1}`, traffic: value }))}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis />
-                      <Tooltip />
-                      <Area type="monotone" dataKey="traffic" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} />
-                    </AreaChart>
+                     <AreaChart data={auditData.audit.trafficTrend.map((value, index) => ({ month: `Month ${index + 1}`, traffic: value }))}>
+                       <CartesianGrid strokeDasharray="3 3" />
+                       <XAxis dataKey="month" />
+                       <YAxis />
+                       <Tooltip />
+                       <Area type="monotone" dataKey="traffic" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} />
+                     </AreaChart>
                   </ResponsiveContainer>
                 </CardContent>
               </Card>
@@ -272,13 +174,13 @@ const Dashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
-                    <BarChart data={mockAuditData.audit.aiVisibility.comparison}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="domain" angle={-45} textAnchor="end" height={80} fontSize={10} />
-                      <YAxis />
-                      <Tooltip />
-                      <Bar dataKey="citations" fill="hsl(var(--primary))" />
-                    </BarChart>
+                     <BarChart data={auditData.audit.aiVisibility.comparison}>
+                       <CartesianGrid strokeDasharray="3 3" />
+                       <XAxis dataKey="domain" angle={-45} textAnchor="end" height={80} fontSize={10} />
+                       <YAxis />
+                       <Tooltip />
+                       <Bar dataKey="citations" fill="hsl(var(--primary))" />
+                     </BarChart>
                   </ResponsiveContainer>
                 </CardContent>
               </Card>
@@ -294,12 +196,12 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {mockAuditData.audit.quickWins.slice(0, 5).map((win, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <CheckCircle className="h-4 w-4 text-success" />
-                      <span className="text-sm">{win}</span>
-                    </div>
-                  ))}
+                   {auditData.audit.quickWins.slice(0, 5).map((win, index) => (
+                     <div key={index} className="flex items-center space-x-3">
+                       <CheckCircle className="h-4 w-4 text-success" />
+                       <span className="text-sm">{win}</span>
+                     </div>
+                   ))}
                 </div>
               </CardContent>
             </Card>
@@ -312,20 +214,20 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {mockAuditData.audit.seoIssues.map((issue, index) => (
-                    <div key={index} className="border rounded-lg p-4">
-                      <div className="flex items-start justify-between mb-2">
-                        <h4 className="font-medium">{issue.issue}</h4>
-                        <Badge variant={getImpactColor(issue.impact) as any}>
-                          {issue.impact} Impact
-                        </Badge>
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        Page: {issue.page}
-                      </p>
-                      <p className="text-sm">{issue.recommendation}</p>
-                    </div>
-                  ))}
+                   {auditData.audit.seoIssues.map((issue, index) => (
+                     <div key={index} className="border rounded-lg p-4">
+                       <div className="flex items-start justify-between mb-2">
+                         <h4 className="font-medium">{issue.issue}</h4>
+                         <Badge variant={getImpactColor(issue.impact) as any}>
+                           {issue.impact} Impact
+                         </Badge>
+                       </div>
+                       <p className="text-sm text-muted-foreground mb-2">
+                         Page: {issue.page}
+                       </p>
+                       <p className="text-sm">{issue.recommendation}</p>
+                     </div>
+                   ))}
                 </div>
               </CardContent>
             </Card>
@@ -340,19 +242,19 @@ const Dashboard = () => {
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
                     <PieChart>
-                      <Pie
-                        data={mockAuditData.audit.aiVisibility.comparison}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={(entry: any) => `${entry.domain.split('.')[0]}: ${entry.value}`}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="citations"
-                      >
-                        {mockAuditData.audit.aiVisibility.comparison.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={`hsl(var(--chart-${(index % 5) + 1}))`} />
-                        ))}
+                       <Pie
+                         data={auditData.audit.aiVisibility.comparison}
+                         cx="50%"
+                         cy="50%"
+                         labelLine={false}
+                         label={(entry: any) => `${entry.domain.split('.')[0]}: ${entry.value}`}
+                         outerRadius={80}
+                         fill="#8884d8"
+                         dataKey="citations"
+                       >
+                         {auditData.audit.aiVisibility.comparison.map((entry, index) => (
+                           <Cell key={`cell-${index}`} fill={`hsl(var(--chart-${(index % 5) + 1}))`} />
+                         ))}
                       </Pie>
                       <Tooltip />
                     </PieChart>
@@ -366,20 +268,20 @@ const Dashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {mockAuditData.audit.aiVisibility.topQuestionsPerformance.map((question, index) => (
-                      <div key={index} className="space-y-2">
-                        <p className="text-sm font-medium">{question.question}</p>
-                        <div className="flex justify-between text-xs">
-                          <span>Your Rank: #{question.rnaiscience.rank}</span>
-                          <span>Citations: {question.rnaiscience.citations}</span>
-                        </div>
-                        <div className="flex justify-between text-xs text-muted-foreground">
-                          <span>Top Competitor: {question.topCompetitor.domain}</span>
-                          <span>#{question.topCompetitor.rank} ({question.topCompetitor.citations} citations)</span>
-                        </div>
-                        <Progress value={(6 - question.rnaiscience.rank) * 20} className="h-2" />
-                      </div>
-                    ))}
+                     {auditData.audit.aiVisibility.topQuestionsPerformance.map((question, index) => (
+                       <div key={index} className="space-y-2">
+                         <p className="text-sm font-medium">{question.question}</p>
+                         <div className="flex justify-between text-xs">
+                           <span>Your Rank: #{question.rnaiscience.rank}</span>
+                           <span>Citations: {question.rnaiscience.citations}</span>
+                         </div>
+                         <div className="flex justify-between text-xs text-muted-foreground">
+                           <span>Top Competitor: {question.topCompetitor.domain}</span>
+                           <span>#{question.topCompetitor.rank} ({question.topCompetitor.citations} citations)</span>
+                         </div>
+                         <Progress value={(6 - question.rnaiscience.rank) * 20} className="h-2" />
+                       </div>
+                     ))}
                   </div>
                 </CardContent>
               </Card>
@@ -393,7 +295,7 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
-                  {mockAuditData.input.competitors.map((competitor, index) => (
+                  {auditData.input.competitors.map((competitor, index) => (
                     <div key={index} className="border rounded-lg p-4">
                       <div className="flex items-center justify-between mb-4">
                         <h4 className="font-medium flex items-center">
@@ -409,13 +311,13 @@ const Dashboard = () => {
                         <div>
                           <span className="text-muted-foreground">AI Citations:</span>
                           <span className="ml-2 font-medium">
-                            {mockAuditData.audit.aiVisibility.comparison.find(c => c.domain === competitor)?.citations || 0}
+                            {auditData.audit.aiVisibility.comparison.find(c => c.domain === competitor)?.citations || 0}
                           </span>
                         </div>
                         <div>
                           <span className="text-muted-foreground">SERP Mentions:</span>
                           <span className="ml-2 font-medium">
-                            {mockAuditData.audit.aiVisibility.comparison.find(c => c.domain === competitor)?.SERP_mentions || 0}
+                            {auditData.audit.aiVisibility.comparison.find(c => c.domain === competitor)?.SERP_mentions || 0}
                           </span>
                         </div>
                       </div>
@@ -433,7 +335,7 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {mockAuditData.audit.opportunityGaps.map((gap, index) => (
+                  {auditData.audit.opportunityGaps.map((gap, index) => (
                     <div key={index} className="border rounded-lg p-4">
                       <div className="flex items-start justify-between mb-2">
                         <h4 className="font-medium">{gap.issue}</h4>
@@ -474,22 +376,22 @@ const Dashboard = () => {
                     <XAxis dataKey="month" />
                     <YAxis />
                     <Tooltip />
-                    <Line 
-                      data={mockAuditData.audit.forecast.currentTraffic.map((value, index) => ({ month: `M${index + 1}`, traffic: value }))}
-                      type="monotone" 
-                      dataKey="traffic" 
-                      stroke="hsl(var(--muted-foreground))" 
-                      strokeDasharray="5 5"
-                      name="Current Trend"
-                    />
-                    <Line 
-                      data={mockAuditData.audit.forecast.projectedUplift.map((value, index) => ({ month: `M${index + 1}`, traffic: value }))}
-                      type="monotone" 
-                      dataKey="traffic" 
-                      stroke="hsl(var(--primary))" 
-                      strokeWidth={2}
-                      name="Projected Growth"
-                    />
+                     <Line 
+                       data={auditData.audit.forecast.currentTraffic.map((value, index) => ({ month: `M${index + 1}`, traffic: value }))}
+                       type="monotone" 
+                       dataKey="traffic" 
+                       stroke="hsl(var(--muted-foreground))" 
+                       strokeDasharray="5 5"
+                       name="Current Trend"
+                     />
+                     <Line 
+                       data={auditData.audit.forecast.projectedUplift.map((value, index) => ({ month: `M${index + 1}`, traffic: value }))}
+                       type="monotone" 
+                       dataKey="traffic" 
+                       stroke="hsl(var(--primary))" 
+                       strokeWidth={2}
+                       name="Projected Growth"
+                     />
                   </LineChart>
                 </ResponsiveContainer>
               </CardContent>

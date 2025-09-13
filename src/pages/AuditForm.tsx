@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Plus, X, Search, Globe, Users, MessageSquare, Building2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { createAuditData, saveAuditData, type AuditInput } from "@/lib/auditData";
 
 const AuditForm = () => {
   const navigate = useNavigate();
@@ -77,10 +78,21 @@ const AuditForm = () => {
       return;
     }
 
-    // Simulate form submission
+    // Create and save audit data
+    const auditInput: AuditInput = {
+      website: formData.website,
+      region: formData.region,
+      audience: formData.audience,
+      targetQuestions: validQuestions,
+      competitors: validCompetitors
+    };
+
+    const auditData = createAuditData(auditInput);
+    saveAuditData(auditData);
+
     toast({
       title: "Audit Started",
-      description: "Your SEO audit is now being processed...",
+      description: "Your SEO audit data has been generated and saved!",
     });
 
     // Navigate to dashboard
