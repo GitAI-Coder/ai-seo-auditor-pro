@@ -28,16 +28,11 @@ const Index = () => {
                   New Audit
                 </Button>
               </Link>
-              <Link to="/dashboard">
-                <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
-                  Dashboard
-                </Button>
-              </Link>
             </div>
           </div>
 
           <Badge className="mb-6 bg-white/10 text-white border-white/20">
-            🚀 Indegene Hackathon Demo
+            🚀 Indegene Connect & Code Hackathon
           </Badge>
 
           <div className="text-center max-w-4xl mx-auto">
@@ -52,11 +47,6 @@ const Index = () => {
               <Link to="/audit">
                 <Button size="lg" className="bg-white text-primary hover:bg-white/90">
                   Start Free Audit
-                </Button>
-              </Link>
-              <Link to="/dashboard">
-                <Button size="lg" variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
-                  View Sample Report
                 </Button>
               </Link>
             </div>
@@ -160,11 +150,6 @@ const Index = () => {
             <Link to="/audit">
               <Button size="lg" className="bg-primary text-white hover:bg-primary/90">
                 Try Demo Audit
-              </Button>
-            </Link>
-            <Link to="/dashboard">
-              <Button size="lg" variant="outline">
-                AI Features Tour
               </Button>
             </Link>
           </div>
