@@ -505,79 +505,77 @@ const Dashboard = () => {
               <CardContent>
                 <ResponsiveContainer width="100%" height={400}>
                   <LineChart data={[
-                    { month: "Jan-25", clicks: 74 },
-                    { month: "Feb-25", clicks: 74 },
-                    { month: "Mar-25", clicks: 133 },
-                    { month: "Apr-25", clicks: 108 },
-                    { month: "May-25", clicks: 157 },
-                    { month: "Jun-25", clicks: 135 },
-                    { month: "Jul-25", clicks: 125 },
-                    { month: "Aug-25", clicks: 113 },
-                    { month: "Sep-25", clicks: 118 },
-                    { month: "Oct-25", clicks: 115 },
-                    { month: "Nov-25", clicks: 130 },
-                    { month: "Dec-25", clicks: 180 },
-                    { month: "Jan-26", clicks: 230 },
-                    { month: "Feb-26", clicks: 278 },
-                    { month: "Mar-26", clicks: 355 }
-                  ]}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="month" angle={-45} textAnchor="end" height={60} fontSize={12} />
-                    <YAxis />
-                    <Tooltip />
-                    
-                    {/* Historical data - purple line Jan to Aug */}
-                    <Line 
-                      data={[
-                        { month: "Jan-25", clicks: 74 },
-                        { month: "Feb-25", clicks: 74 },
-                        { month: "Mar-25", clicks: 133 },
-                        { month: "Apr-25", clicks: 108 },
-                        { month: "May-25", clicks: 157 },
-                        { month: "Jun-25", clicks: 135 },
-                        { month: "Jul-25", clicks: 125 },
-                        { month: "Aug-25", clicks: 113 },
-                        { month: "Sep-25", clicks: 118 }
-                      ]}
-                      type="monotone" 
-                      dataKey="clicks" 
-                      stroke="hsl(var(--primary))" 
-                      strokeWidth={3}
-                      name="Historical Data"
-                    />
-                    
-                    {/* Trend data - different color Aug to Oct */}
-                    <Line 
-                      data={[
-                        { month: "Aug-25", clicks: 113 },
-                        { month: "Sep-25", clicks: 118 },
-                        { month: "Oct-25", clicks: 115 },
-                        { month: "Nov-25", clicks: 130 }
-                      ]}
-                      type="monotone" 
-                      dataKey="clicks" 
-                      stroke="hsl(var(--accent))" 
-                      strokeWidth={3}
-                      name="Current Trend"
-                    />
-                    
-                    {/* Forecast data - dotted line Oct to Mar */}
-                    <Line 
-                      data={[
-                        { month: "Oct-25", clicks: 115 },
-                        { month: "Nov-25", clicks: 130 },
-                        { month: "Dec-25", clicks: 180 },
-                        { month: "Jan-26", clicks: 230 },
-                        { month: "Feb-26", clicks: 278 },
-                        { month: "Mar-26", clicks: 355 }
-                      ]}
-                      type="monotone" 
-                      dataKey="clicks" 
-                      stroke="hsl(var(--secondary))" 
-                      strokeWidth={3}
-                      strokeDasharray="8 4"
-                      name="Forecast"
-                    />
+                     { month: "Jan-25", clicks: 74 },
+                     { month: "Feb-25", clicks: 74 },
+                     { month: "Mar-25", clicks: 133 },
+                     { month: "Apr-25", clicks: 108 },
+                     { month: "May-25", clicks: 157 },
+                     { month: "Jun-25", clicks: 135 },
+                     { month: "Jul-25", clicks: 125 },
+                     { month: "Aug-25", clicks: 113 },
+                     { month: "Sep-25", clicks: 118 },
+                     { month: "Oct-25", clicks: 115 },
+                     { month: "Nov-25", clicks: 130 },
+                     { month: "Dec-25", clicks: 180 },
+                     { month: "Jan-26", clicks: 230 },
+                     { month: "Feb-26", clicks: 278 },
+                     { month: "Mar-26", clicks: 355 }
+                   ]}>
+                     <CartesianGrid strokeDasharray="3 3" />
+                     <XAxis dataKey="month" angle={-45} textAnchor="end" height={60} fontSize={12} />
+                     <YAxis />
+                     <Tooltip />
+                     
+                     {/* Historical data - dark red line Jan to Aug */}
+                     <Line 
+                       data={[
+                         { month: "Jan-25", clicks: 74 },
+                         { month: "Feb-25", clicks: 74 },
+                         { month: "Mar-25", clicks: 133 },
+                         { month: "Apr-25", clicks: 108 },
+                         { month: "May-25", clicks: 157 },
+                         { month: "Jun-25", clicks: 135 },
+                         { month: "Jul-25", clicks: 125 },
+                         { month: "Aug-25", clicks: 113 }
+                       ]}
+                       type="monotone" 
+                       dataKey="clicks" 
+                       stroke="#8B2635" 
+                       strokeWidth={3}
+                       name="Historical Data"
+                     />
+                     
+                     {/* Current trend - orange line Aug to Dec */}
+                     <Line 
+                       data={[
+                         { month: "Aug-25", clicks: 113 },
+                         { month: "Sep-25", clicks: 118 },
+                         { month: "Oct-25", clicks: 115 },
+                         { month: "Nov-25", clicks: 130 },
+                         { month: "Dec-25", clicks: 180 }
+                       ]}
+                       type="monotone" 
+                       dataKey="clicks" 
+                       stroke="#F59E0B" 
+                       strokeWidth={3}
+                       name="Current Trend"
+                     />
+                     
+                     {/* Forecast data - green dashed line Dec to Mar */}
+                     <Line 
+                       data={[
+                         { month: "Dec-25", clicks: 180 },
+                         { month: "Jan-26", clicks: 230 },
+                         { month: "Feb-26", clicks: 278 },
+                         { month: "Mar-26", clicks: 355 }
+                       ]}
+                       type="monotone" 
+                       dataKey="clicks" 
+                       stroke="#10B981" 
+                       strokeWidth={3}
+                       strokeDasharray="5 5"
+                       name="Forecast"
+                     />
                   </LineChart>
                 </ResponsiveContainer>
               </CardContent>
