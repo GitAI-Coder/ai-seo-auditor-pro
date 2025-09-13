@@ -163,20 +163,29 @@ const Dashboard = () => {
 
           <TabsContent value="overview" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Traffic Trend Chart */}
+              {/* Clicks Trend Chart */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Traffic Trend</CardTitle>
+                  <CardTitle>Clicks Trend</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
-                     <AreaChart data={auditData.audit.trafficTrend.map((value, index) => ({ month: `Month ${index + 1}`, traffic: value }))}>
+                     <LineChart data={[
+                       { month: "Jan-25", clicks: 74 },
+                       { month: "Feb-25", clicks: 74 },
+                       { month: "Mar-25", clicks: 133 },
+                       { month: "Apr-25", clicks: 108 },
+                       { month: "May-25", clicks: 157 },
+                       { month: "Jun-25", clicks: 135 },
+                       { month: "Jul-25", clicks: 125 },
+                       { month: "Aug-25", clicks: 113 }
+                     ]}>
                        <CartesianGrid strokeDasharray="3 3" />
                        <XAxis dataKey="month" />
                        <YAxis />
                        <Tooltip />
-                       <Area type="monotone" dataKey="traffic" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} />
-                     </AreaChart>
+                       <Line type="monotone" dataKey="clicks" stroke="hsl(var(--primary))" strokeWidth={2} />
+                     </LineChart>
                   </ResponsiveContainer>
                 </CardContent>
               </Card>
