@@ -60,10 +60,10 @@ const AuditForm = () => {
       return;
     }
 
-    if (validQuestions.length < 10) {
+    if (validQuestions.length === 0) {
       toast({
-        title: "Insufficient Target Questions",
-        description: "Please provide at least 10 target questions",
+        title: "No Target Questions Added",
+        description: "Please add at least one target question",
         variant: "destructive"
       });
       return;
@@ -198,10 +198,10 @@ const AuditForm = () => {
                 <div className="flex items-center justify-between">
                   <Label className="flex items-center text-base font-medium">
                     <MessageSquare className="h-4 w-4 mr-2 text-primary" />
-                    Target Questions (minimum 10)
+                    Target Questions
                   </Label>
                   <Badge variant="outline" className="text-xs">
-                    {formData.targetQuestions.filter(q => q.trim()).length}/10 minimum
+                    {formData.targetQuestions.filter(q => q.trim()).length} questions
                   </Badge>
                 </div>
                 <p className="text-sm text-muted-foreground">
