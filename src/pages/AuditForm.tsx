@@ -44,6 +44,39 @@ const AuditForm = () => {
     }));
   };
 
+  const normalizeUrl = (url: string): string => {
+    if (!url) return url;
+    
+    let normalizedUrl = url.trim();
+    
+    // Add protocol if missing
+    if (!normalizedUrl.match(/^https?:\/\//)) {
+      normalizedUrl = `https://${normalizedUrl}`;
+    }
+    
+    // Remove trailing slash
+    normalizedUrl = normalizedUrl.replace(/\/$/, '');
+    
+    return normalizedUrl;
+  };
+
+  const normalizeCompetitorUrls = (competitors: string[]): string[] => {
+    return competitors.map(competitor => {
+      if (!competitor.trim()) return competitor;
+      let normalized = competitor.trim();
+      
+      // Add protocol if missing
+      if (!normalized.match(/^https?:\/\//)) {
+        normalized = `https://${normalized}`;
+      }
+      
+      // Remove trailing slash
+      normalized = normalized.replace(/\/$/, '');
+      
+      return normalized;
+    });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -78,13 +111,13 @@ const AuditForm = () => {
       return;
     }
 
-    // Create and save audit data
+    // Create and save audit data with normalized URLs
     const auditInput: AuditInput = {
-      website: formData.website,
+      website: normalizeUrl(formData.website),
       region: formData.region,
       audience: formData.audience,
       targetQuestions: validQuestions,
-      competitors: validCompetitors
+      competitors: normalizeCompetitorUrls(validCompetitors)
     };
 
     const auditData = createAuditData(auditInput);
@@ -143,8 +176,8 @@ const AuditForm = () => {
                 </Label>
                 <Input
                   id="website"
-                  type="url"
-                  placeholder="https://example.com"
+                  type="text"
+                  placeholder="example.com or https://www.example.com"
                   value={formData.website}
                   onChange={(e) => setFormData(prev => ({ ...prev, website: e.target.value }))}
                   className="text-base"
@@ -253,7 +286,7 @@ const AuditForm = () => {
                   {formData.competitors.map((competitor, index) => (
                     <div key={index} className="flex gap-2">
                       <Input
-                        placeholder="competitor-website.com"
+                        placeholder="competitor.com or https://www.competitor.com"
                         value={competitor}
                         onChange={(e) => updateField("competitors", index, e.target.value)}
                         className="flex-1"
