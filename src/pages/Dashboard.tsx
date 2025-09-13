@@ -10,17 +10,25 @@ import {
   LineChart, Line, PieChart, Pie, Cell, Area, AreaChart
 } from 'recharts';
 import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { 
   TrendingUp, TrendingDown, AlertTriangle, CheckCircle, 
   Download, Settings, Bell, ExternalLink, Search, Target,
-  Users, Globe, MessageSquare, Zap, Award, ArrowUp, Plus
+  Users, Globe, MessageSquare, Zap, Award, ArrowUp, Plus, ChevronDown
 } from "lucide-react";
 import { getLatestAuditData, type AuditData } from "@/lib/auditData";
+import { useReportDownload } from "@/hooks/useReportDownload";
 
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
   const [auditData, setAuditData] = useState<AuditData | null>(null);
+  const { downloadReport, isDownloading } = useReportDownload();
 
   useEffect(() => {
     const data = getLatestAuditData();
@@ -86,10 +94,35 @@ const Dashboard = () => {
               <Bell className="h-4 w-4 mr-2" />
               Notifications
             </Button>
-            <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
-              <Download className="h-4 w-4 mr-2" />
-              Download Report
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  disabled={isDownloading}
+                >
+                  <Download className="h-4 w-4 mr-2" />
+                  {isDownloading ? 'Generating...' : 'Download Report'}
+                  <ChevronDown className="h-4 w-4 ml-2" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem 
+                  onClick={() => auditData && downloadReport('excel', auditData)}
+                  disabled={!auditData || isDownloading}
+                >
+                  <Download className="h-4 w-4 mr-2" />
+                  Download Excel Report
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  onClick={() => auditData && downloadReport('pdf', auditData)}
+                  disabled={!auditData || isDownloading}
+                >
+                  <Download className="h-4 w-4 mr-2" />
+                  Download PDF Report
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
               <Settings className="h-4 w-4 mr-2" />
               Settings
