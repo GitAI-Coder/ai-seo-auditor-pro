@@ -71,9 +71,13 @@ export interface AuditData {
       attachAuditFile: boolean;
     };
     downloadOption: boolean;
-    apiPlaceholders: {
+    apiKeys: {
       awsBedrock: string;
-      otherAPIs: string[];
+      gscApi: string;
+      ga4Api: string;
+      webscrapingApi: string;
+      semrushApi: string;
+      ahrefsApi: string;
     };
   };
   meta: {
@@ -235,9 +239,13 @@ export const createAuditData = (input: AuditInput): AuditData => ({
       attachAuditFile: true
     },
     downloadOption: true,
-    apiPlaceholders: {
-      awsBedrock: "<BEDROCK_API_KEY_PLACEHOLDER>",
-      otherAPIs: ["<GA4_PLACEHOLDER>", "<GSC_PLACEHOLDER>"]
+    apiKeys: {
+      awsBedrock: "",
+      gscApi: "",
+      ga4Api: "",
+      webscrapingApi: "",
+      semrushApi: "",
+      ahrefsApi: ""
     }
   },
   meta: {

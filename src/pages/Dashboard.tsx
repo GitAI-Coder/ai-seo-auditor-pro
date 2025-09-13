@@ -23,6 +23,7 @@ import {
 import { getLatestAuditData, updateAuditSettings, type AuditData } from "@/lib/auditData";
 import { useReportDownload } from "@/hooks/useReportDownload";
 import { NotificationsDialog } from "@/components/NotificationsDialog";
+import SettingsDialog from "@/components/SettingsDialog";
 
 
 const Dashboard = () => {
@@ -30,6 +31,7 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const [auditData, setAuditData] = useState<AuditData | null>(null);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const { downloadReport, isDownloading } = useReportDownload();
 
   useEffect(() => {
@@ -136,7 +138,11 @@ const Dashboard = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+            <Button 
+              variant="outline" 
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+              onClick={() => setSettingsOpen(true)}
+            >
               <Settings className="h-4 w-4 mr-2" />
               Settings
             </Button>
@@ -588,6 +594,13 @@ const Dashboard = () => {
         open={notificationsOpen}
         onOpenChange={setNotificationsOpen}
         auditData={auditData}
+        onSettingsUpdate={handleSettingsUpdate}
+      />
+      
+      <SettingsDialog
+        open={settingsOpen}
+        onOpenChange={setSettingsOpen}
+        currentSettings={auditData?.settings || {}}
         onSettingsUpdate={handleSettingsUpdate}
       />
     </div>
