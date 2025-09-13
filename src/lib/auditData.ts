@@ -81,7 +81,7 @@ export const createAuditData = (input: AuditInput): AuditData => ({
     seoScore: Math.floor(Math.random() * 30) + 60, // 60-89
     aiCitationScore: Math.floor(Math.random() * 40) + 50, // 50-89
     criticalIssues: Math.floor(Math.random() * 15) + 3, // 3-17
-    trafficTrend: Array.from({ length: 6 }, () => Math.floor(Math.random() * 300) + 1000),
+    trafficTrend: [74, 74, 133, 108, 157, 135, 125, 113],
     opportunityGaps: [
       {
         issue: "Missing FAQ schema for key questions",
