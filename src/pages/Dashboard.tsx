@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, PieChart, Pie, Cell, Area, AreaChart
@@ -21,6 +23,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
   const [auditData, setAuditData] = useState<AuditData | null>(null);
+  const [websiteName, setWebsiteName] = useState("");
 
   useEffect(() => {
     const data = getLatestAuditData();
@@ -93,6 +96,22 @@ const Dashboard = () => {
       </header>
 
       <div className="max-w-7xl mx-auto p-6">
+        {/* Website Name Input */}
+        <div className="mb-6">
+          <div className="max-w-md">
+            <Label htmlFor="website-name" className="text-sm font-medium mb-2 block">
+              Website Name:
+            </Label>
+            <Input
+              id="website-name"
+              type="text"
+              placeholder="Enter website name"
+              value={websiteName}
+              onChange={(e) => setWebsiteName(e.target.value)}
+              className="w-full"
+            />
+          </div>
+        </div>
         {/* Overview Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card>
