@@ -50,7 +50,6 @@ export interface AuditData {
     criticalIssues: number;
     trafficTrend: number[];
     citationsProfile: CitationsProfile;
-    opportunityGaps: OpportunityGap[];
     seoIssues: SEOIssue[];
     competitorSeoIssues: Record<string, SEOIssue[]>;
     aiVisibility: {
@@ -94,32 +93,6 @@ export const createAuditData = (input: AuditInput): AuditData => ({
       backlinks: 791,
       refDomains: 20
     },
-    opportunityGaps: [
-      {
-        issue: "Missing FAQ schema for key questions",
-        page: "/faq",
-        impact: "High",
-        effort: "Low",
-        recommendation: "Add FAQ Structured Data for key questions",
-        quickWin: true
-      },
-      {
-        issue: "Brand does not appear in AI/LLM citations for key terms",
-        page: "/conditions",
-        impact: "High",
-        effort: "Medium",
-        recommendation: "Optimize pages for AI visibility with targeted content and structured data",
-        quickWin: false
-      },
-      {
-        issue: "Competitors ranking for important industry keywords",
-        page: "/treatments",
-        impact: "Medium",
-        effort: "Medium",
-        recommendation: "Add regularly updated content and optimize metadata",
-        quickWin: false
-      }
-    ],
     seoIssues: [
       {
         issue: "Missing biomedical structured data",

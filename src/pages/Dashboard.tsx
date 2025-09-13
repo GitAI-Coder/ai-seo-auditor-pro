@@ -158,12 +158,11 @@ const Dashboard = () => {
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="seo-issues">SEO Issues</TabsTrigger>
             <TabsTrigger value="ai-visibility">AI Visibility</TabsTrigger>
             <TabsTrigger value="competitors">Competitors</TabsTrigger>
-            <TabsTrigger value="opportunities">Opportunities</TabsTrigger>
+            <TabsTrigger value="seo-issues">Quick Wins</TabsTrigger>
             <TabsTrigger value="forecast">Forecast</TabsTrigger>
           </TabsList>
 
@@ -333,7 +332,7 @@ const Dashboard = () => {
           <TabsContent value="seo-issues" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>SEO Issues Analysis</CardTitle>
+                <CardTitle>Quick Wins Analysis</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -451,41 +450,6 @@ const Dashboard = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="opportunities" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Opportunity Gaps</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {auditData.audit.opportunityGaps.map((gap, index) => (
-                    <div key={index} className="border rounded-lg p-4">
-                      <div className="flex items-start justify-between mb-2">
-                        <h4 className="font-medium">{gap.issue}</h4>
-                        <div className="flex space-x-2">
-                        <Badge variant={getImpactColor(gap.impact) as any}>
-                          {gap.impact} Impact
-                        </Badge>
-                        <Badge variant={gap.effort === "Low" ? "default" : "secondary"}>
-                          {gap.effort} Effort
-                        </Badge>
-                          {gap.quickWin && (
-                            <Badge variant="outline" className="border-warning text-warning">
-                              Quick Win
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        Page: {gap.page}
-                      </p>
-                      <p className="text-sm">{gap.recommendation}</p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
 
           <TabsContent value="forecast" className="space-y-6">
             <Card>
