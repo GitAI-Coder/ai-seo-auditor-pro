@@ -171,7 +171,7 @@ const Dashboard = () => {
               {/* Clicks Trend Chart */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Clicks Trend</CardTitle>
+                  <CardTitle>Organic Clicks</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
