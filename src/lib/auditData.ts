@@ -85,8 +85,8 @@ export interface AuditData {
 export const createAuditData = (input: AuditInput): AuditData => ({
   input,
   audit: {
-    seoScore: Math.floor(Math.random() * 30) + 60, // 60-89
-    aiCitationScore: Math.floor(Math.random() * 40) + 50, // 50-89
+    seoScore: 30,
+    aiCitationScore: 11,
     criticalIssues: Math.floor(Math.random() * 15) + 3, // 3-17
     trafficTrend: [74, 74, 133, 108, 157, 135, 125, 113],
     citationsProfile: {

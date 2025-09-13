@@ -113,7 +113,7 @@ const Dashboard = () => {
               <Award className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-primary">{auditData.audit.seoScore}/100</div>
+              <div className="text-2xl font-bold text-orange-500">{auditData.audit.seoScore}/100</div>
               <Progress value={auditData.audit.seoScore} className="mt-2" />
             </CardContent>
           </Card>
@@ -124,7 +124,7 @@ const Dashboard = () => {
               <Target className="h-4 w-4 text-accent" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-accent">{auditData.audit.aiCitationScore}/100</div>
+              <div className="text-2xl font-bold text-red-500">{auditData.audit.aiCitationScore}/100</div>
               <Progress value={auditData.audit.aiCitationScore} className="mt-2" />
             </CardContent>
           </Card>
@@ -148,7 +148,7 @@ const Dashboard = () => {
               <TrendingUp className="h-4 w-4 text-success" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-success">+12.5%</div>
+              <div className="text-2xl font-bold text-orange-500">+12.5%</div>
               <p className="text-xs text-muted-foreground mt-1">
                 vs last month
               </p>
