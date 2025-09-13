@@ -215,7 +215,7 @@ export const createAuditData = (input: AuditInput): AuditData => ({
         { month: "Jun-25", clicks: 135, type: "historical" },
         { month: "Jul-25", clicks: 125, type: "historical" },
         { month: "Aug-25", clicks: 113, type: "historical" },
-        { month: "Sep-25", clicks: 118, type: "trend" },
+        { month: "Sep-25", clicks: 118, type: "historical" },
         { month: "Oct-25", clicks: 115, type: "trend" },
         { month: "Nov-25", clicks: 130, type: "forecast" },
         { month: "Dec-25", clicks: 180, type: "forecast" },
