@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,7 +12,7 @@ import {
 import { 
   TrendingUp, TrendingDown, AlertTriangle, CheckCircle, 
   Download, Settings, Bell, ExternalLink, Search, Target,
-  Users, Globe, MessageSquare, Zap, Award, ArrowUp
+  Users, Globe, MessageSquare, Zap, Award, ArrowUp, Plus
 } from "lucide-react";
 import { getLatestAuditData, type AuditData } from "@/lib/auditData";
 
@@ -62,12 +62,20 @@ const Dashboard = () => {
             <div className="flex items-center space-x-2">
               <Search className="h-8 w-8" />
               <div>
-                <h1 className="text-2xl font-bold">AI-SEO Audit</h1>
+                <Link to="/" className="hover:opacity-80 transition-opacity">
+                  <h1 className="text-2xl font-bold">AI-SEO Audit</h1>
+                </Link>
                 <p className="text-sm opacity-90">Indegene NexGen AI Surfers</p>
               </div>
             </div>
           </div>
           <div className="flex items-center space-x-4">
+            <Link to="/audit">
+              <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+                <Plus className="h-4 w-4 mr-2" />
+                New Audit
+              </Button>
+            </Link>
             <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
               <Bell className="h-4 w-4 mr-2" />
               Notifications
