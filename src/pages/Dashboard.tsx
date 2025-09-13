@@ -458,27 +458,81 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={400}>
-                  <LineChart>
+                  <LineChart data={[
+                    { month: "Jan-25", clicks: 74, type: "historical" },
+                    { month: "Feb-25", clicks: 74, type: "historical" },
+                    { month: "Mar-25", clicks: 133, type: "historical" },
+                    { month: "Apr-25", clicks: 108, type: "historical" },
+                    { month: "May-25", clicks: 157, type: "historical" },
+                    { month: "Jun-25", clicks: 135, type: "historical" },
+                    { month: "Jul-25", clicks: 125, type: "historical" },
+                    { month: "Aug-25", clicks: 113, type: "historical" },
+                    { month: "Sep-25", clicks: 118, type: "trend" },
+                    { month: "Oct-25", clicks: 115, type: "trend" },
+                    { month: "Nov-25", clicks: 130, type: "forecast" },
+                    { month: "Dec-25", clicks: 180, type: "forecast" },
+                    { month: "Jan-26", clicks: 230, type: "forecast" },
+                    { month: "Feb-26", clicks: 278, type: "forecast" },
+                    { month: "Mar-26", clicks: 355, type: "forecast" }
+                  ]}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="month" />
+                    <XAxis dataKey="month" angle={-45} textAnchor="end" height={60} fontSize={12} />
                     <YAxis />
                     <Tooltip />
-                     <Line 
-                       data={auditData.audit.forecast.currentTraffic.map((value, index) => ({ month: `M${index + 1}`, traffic: value }))}
-                       type="monotone" 
-                       dataKey="traffic" 
-                       stroke="hsl(var(--muted-foreground))" 
-                       strokeDasharray="5 5"
-                       name="Current Trend"
-                     />
-                     <Line 
-                       data={auditData.audit.forecast.projectedUplift.map((value, index) => ({ month: `M${index + 1}`, traffic: value }))}
-                       type="monotone" 
-                       dataKey="traffic" 
-                       stroke="hsl(var(--primary))" 
-                       strokeWidth={2}
-                       name="Projected Growth"
-                     />
+                    
+                    {/* Historical data - purple line */}
+                    <Line 
+                      data={[
+                        { month: "Jan-25", clicks: 74 },
+                        { month: "Feb-25", clicks: 74 },
+                        { month: "Mar-25", clicks: 133 },
+                        { month: "Apr-25", clicks: 108 },
+                        { month: "May-25", clicks: 157 },
+                        { month: "Jun-25", clicks: 135 },
+                        { month: "Jul-25", clicks: 125 },
+                        { month: "Aug-25", clicks: 113 }
+                      ]}
+                      type="monotone" 
+                      dataKey="clicks" 
+                      stroke="hsl(var(--primary))" 
+                      strokeWidth={3}
+                      name="Historical Data"
+                      connectNulls={false}
+                    />
+                    
+                    {/* Trend data - different color */}
+                    <Line 
+                      data={[
+                        { month: "Aug-25", clicks: 113 },
+                        { month: "Sep-25", clicks: 118 },
+                        { month: "Oct-25", clicks: 115 }
+                      ]}
+                      type="monotone" 
+                      dataKey="clicks" 
+                      stroke="hsl(var(--accent))" 
+                      strokeWidth={3}
+                      name="Current Trend"
+                      connectNulls={false}
+                    />
+                    
+                    {/* Forecast data - dotted line */}
+                    <Line 
+                      data={[
+                        { month: "Oct-25", clicks: 115 },
+                        { month: "Nov-25", clicks: 130 },
+                        { month: "Dec-25", clicks: 180 },
+                        { month: "Jan-26", clicks: 230 },
+                        { month: "Feb-26", clicks: 278 },
+                        { month: "Mar-26", clicks: 355 }
+                      ]}
+                      type="monotone" 
+                      dataKey="clicks" 
+                      stroke="hsl(var(--secondary))" 
+                      strokeWidth={3}
+                      strokeDasharray="8 4"
+                      name="Forecast"
+                      connectNulls={false}
+                    />
                   </LineChart>
                 </ResponsiveContainer>
               </CardContent>
