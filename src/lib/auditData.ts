@@ -58,6 +58,7 @@ export interface AuditData {
     };
     quickWins: string[];
     forecast: {
+      trafficData: Array<{ month: string; clicks: number; type: "historical" | "trend" | "forecast" }>;
       currentTraffic: number[];
       projectedUplift: number[];
     };
@@ -205,8 +206,25 @@ export const createAuditData = (input: AuditInput): AuditData => ({
       "Improve Core Web Vitals (LCP, INP, CLS) and server responsiveness."
     ],
     forecast: {
-      currentTraffic: Array.from({ length: 6 }, () => Math.floor(Math.random() * 300) + 1000),
-      projectedUplift: Array.from({ length: 6 }, (_, i) => Math.floor(Math.random() * 300) + 1200 + (i * 50))
+      trafficData: [
+        { month: "Jan-25", clicks: 74, type: "historical" },
+        { month: "Feb-25", clicks: 74, type: "historical" },
+        { month: "Mar-25", clicks: 133, type: "historical" },
+        { month: "Apr-25", clicks: 108, type: "historical" },
+        { month: "May-25", clicks: 157, type: "historical" },
+        { month: "Jun-25", clicks: 135, type: "historical" },
+        { month: "Jul-25", clicks: 125, type: "historical" },
+        { month: "Aug-25", clicks: 113, type: "historical" },
+        { month: "Sep-25", clicks: 118, type: "trend" },
+        { month: "Oct-25", clicks: 115, type: "trend" },
+        { month: "Nov-25", clicks: 130, type: "forecast" },
+        { month: "Dec-25", clicks: 180, type: "forecast" },
+        { month: "Jan-26", clicks: 230, type: "forecast" },
+        { month: "Feb-26", clicks: 278, type: "forecast" },
+        { month: "Mar-26", clicks: 355, type: "forecast" }
+      ],
+      currentTraffic: [74, 74, 133, 108, 157, 135, 125, 113, 118, 115, 130, 180, 230, 278, 355],
+      projectedUplift: [74, 74, 133, 108, 157, 135, 125, 113, 118, 115, 130, 180, 230, 278, 355]
     }
   },
   settings: {
