@@ -553,11 +553,23 @@ const Dashboard = () => {
                        stroke="hsl(var(--primary))" 
                        strokeWidth={3}
                        name="Actual Traffic"
+                       connectNulls={false}
                      />
                      
-                     {/* Forecast portion with different color and dashed style */}
+                     {/* Forecast portion starting from Dec-25 with dashed pink line */}
                      <Line 
                        data={[
+                         { month: "Jan-25", clicks: null },
+                         { month: "Feb-25", clicks: null },
+                         { month: "Mar-25", clicks: null },
+                         { month: "Apr-25", clicks: null },
+                         { month: "May-25", clicks: null },
+                         { month: "Jun-25", clicks: null },
+                         { month: "Jul-25", clicks: null },
+                         { month: "Aug-25", clicks: null },
+                         { month: "Sep-25", clicks: null },
+                         { month: "Oct-25", clicks: null },
+                         { month: "Nov-25", clicks: null },
                          { month: "Dec-25", clicks: 180 },
                          { month: "Jan-26", clicks: 230 },
                          { month: "Feb-26", clicks: 278 },
@@ -565,10 +577,11 @@ const Dashboard = () => {
                        ]}
                        type="monotone" 
                        dataKey="clicks" 
-                       stroke="hsl(var(--chart-2))" 
+                       stroke="#EC4899" 
                        strokeWidth={3}
                        strokeDasharray="8 4"
                        name="Forecast"
+                       connectNulls={false}
                      />
                   </LineChart>
                 </ResponsiveContainer>
