@@ -532,7 +532,7 @@ const Dashboard = () => {
                      <YAxis />
                      <Tooltip />
                      
-                     {/* Single trend line for historical data */}
+                     {/* Historical data line - Jan to Dec 2025 */}
                      <Line 
                        data={[
                          { month: "Jan-25", clicks: 74 },
@@ -556,7 +556,7 @@ const Dashboard = () => {
                        connectNulls={false}
                      />
                      
-                     {/* Forecast portion starting from Dec-25 with dashed pink line */}
+                     {/* Forecast line - Dec 2025 to Mar 2026 */}
                      <Line 
                        data={[
                          { month: "Jan-25", clicks: null },
