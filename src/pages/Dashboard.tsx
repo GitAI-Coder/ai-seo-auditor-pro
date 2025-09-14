@@ -511,77 +511,57 @@ const Dashboard = () => {
               <CardContent>
                 <ResponsiveContainer width="100%" height={400}>
                   <LineChart data={[
-                     { month: "Jan-25", clicks: 74 },
-                     { month: "Feb-25", clicks: 74 },
-                     { month: "Mar-25", clicks: 133 },
-                     { month: "Apr-25", clicks: 108 },
-                     { month: "May-25", clicks: 157 },
-                     { month: "Jun-25", clicks: 135 },
-                     { month: "Jul-25", clicks: 125 },
-                     { month: "Aug-25", clicks: 113 },
-                     { month: "Sep-25", clicks: 118 },
-                     { month: "Oct-25", clicks: 115 },
-                     { month: "Nov-25", clicks: 130 },
-                     { month: "Dec-25", clicks: 180 },
-                     { month: "Jan-26", clicks: 230 },
-                     { month: "Feb-26", clicks: 278 },
-                     { month: "Mar-26", clicks: 355 }
+                     { month: "Jan-25", actual: 74, forecast: null },
+                     { month: "Feb-25", actual: 74, forecast: null },
+                     { month: "Mar-25", actual: 133, forecast: null },
+                     { month: "Apr-25", actual: 108, forecast: null },
+                     { month: "May-25", actual: 157, forecast: null },
+                     { month: "Jun-25", actual: 135, forecast: null },
+                     { month: "Jul-25", actual: 125, forecast: null },
+                     { month: "Aug-25", actual: 113, forecast: null },
+                     { month: "Sep-25", actual: 118, forecast: null },
+                     { month: "Oct-25", actual: 115, forecast: null },
+                     { month: "Nov-25", actual: 130, forecast: null },
+                     { month: "Dec-25", actual: 180, forecast: 180 },
+                     { month: "Jan-26", actual: null, forecast: 230 },
+                     { month: "Feb-26", actual: null, forecast: 278 },
+                     { month: "Mar-26", actual: null, forecast: 355 }
                    ]} margin={{ top: 8, right: 8, left: 0, bottom: 24 }}>
                      <CartesianGrid strokeDasharray="3 3" />
-                     <XAxis dataKey="month" angle={-45} textAnchor="end" height={60} fontSize={12} interval={0} ticks={["Jan-25","Feb-25","Mar-25","Apr-25","May-25","Jun-25","Jul-25","Aug-25","Sep-25","Oct-25","Nov-25","Dec-25","Jan-26","Feb-26","Mar-26"]} scale="point" padding={{ left: 0, right: 0 }} tickMargin={8} />
+                     <XAxis 
+                       dataKey="month" 
+                       angle={-45} 
+                       textAnchor="end" 
+                       height={60} 
+                       fontSize={12} 
+                       interval={0}
+                       axisLine={false}
+                       tickLine={false}
+                     />
                      <YAxis />
-                     <Tooltip />
+                     <Tooltip formatter={(value, name) => [value, name === 'actual' ? 'Actual Traffic' : 'Forecast']} />
                      
-                     {/* Historical data line - Jan to Dec 2025 */}
+                     {/* Actual traffic line */}
                      <Line 
-                       data={[
-                         { month: "Jan-25", clicks: 74 },
-                         { month: "Feb-25", clicks: 74 },
-                         { month: "Mar-25", clicks: 133 },
-                         { month: "Apr-25", clicks: 108 },
-                         { month: "May-25", clicks: 157 },
-                         { month: "Jun-25", clicks: 135 },
-                         { month: "Jul-25", clicks: 125 },
-                         { month: "Aug-25", clicks: 113 },
-                         { month: "Sep-25", clicks: 118 },
-                         { month: "Oct-25", clicks: 115 },
-                         { month: "Nov-25", clicks: 130 },
-                         { month: "Dec-25", clicks: 180 }
-                       ]}
                        type="monotone" 
-                       dataKey="clicks" 
+                       dataKey="actual" 
                        stroke="hsl(var(--primary))" 
                        strokeWidth={3}
                        name="Actual Traffic"
                        connectNulls={false}
+                       dot={{ fill: "hsl(var(--primary))", strokeWidth: 2, r: 4 }}
                      />
                      
-                     {/* Forecast line - Dec 2025 to Mar 2026 */}
+                     {/* Forecast line */}
                      <Line 
-                       data={[
-                         { month: "Jan-25", clicks: null },
-                         { month: "Feb-25", clicks: null },
-                         { month: "Mar-25", clicks: null },
-                         { month: "Apr-25", clicks: null },
-                         { month: "May-25", clicks: null },
-                         { month: "Jun-25", clicks: null },
-                         { month: "Jul-25", clicks: null },
-                         { month: "Aug-25", clicks: null },
-                         { month: "Sep-25", clicks: null },
-                         { month: "Oct-25", clicks: null },
-                         { month: "Nov-25", clicks: null },
-                         { month: "Dec-25", clicks: 180 },
-                         { month: "Jan-26", clicks: 230 },
-                         { month: "Feb-26", clicks: 278 },
-                         { month: "Mar-26", clicks: 355 }
-                       ]}
                        type="monotone" 
-                       dataKey="clicks" 
+                       dataKey="forecast" 
                        stroke="#10B981" 
                        strokeWidth={3}
                        strokeDasharray="8 4"
                        name="Forecast"
                        connectNulls={false}
+                       dot={{ fill: "#10B981", strokeWidth: 2, r: 4 }}
                      />
                   </LineChart>
                 </ResponsiveContainer>
