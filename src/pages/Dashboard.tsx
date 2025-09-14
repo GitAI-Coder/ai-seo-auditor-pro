@@ -532,7 +532,7 @@ const Dashboard = () => {
                      <YAxis />
                      <Tooltip />
                      
-                     {/* Historical data - dark red line Jan to Aug */}
+                     {/* Single trend line for historical data */}
                      <Line 
                        data={[
                          { month: "Jan-25", clicks: 74 },
@@ -542,18 +542,6 @@ const Dashboard = () => {
                          { month: "May-25", clicks: 157 },
                          { month: "Jun-25", clicks: 135 },
                          { month: "Jul-25", clicks: 125 },
-                         { month: "Aug-25", clicks: 113 }
-                       ]}
-                       type="monotone" 
-                       dataKey="clicks" 
-                       stroke="#8B2635" 
-                       strokeWidth={3}
-                       name="Historical Data"
-                     />
-                     
-                     {/* Current trend - orange line Aug to Dec */}
-                     <Line 
-                       data={[
                          { month: "Aug-25", clicks: 113 },
                          { month: "Sep-25", clicks: 118 },
                          { month: "Oct-25", clicks: 115 },
@@ -562,12 +550,12 @@ const Dashboard = () => {
                        ]}
                        type="monotone" 
                        dataKey="clicks" 
-                       stroke="#F59E0B" 
+                       stroke="hsl(var(--primary))" 
                        strokeWidth={3}
-                       name="Current Trend"
+                       name="Actual Traffic"
                      />
                      
-                     {/* Forecast data - green dashed line Dec to Mar */}
+                     {/* Forecast portion with different color and dashed style */}
                      <Line 
                        data={[
                          { month: "Dec-25", clicks: 180 },
@@ -577,9 +565,9 @@ const Dashboard = () => {
                        ]}
                        type="monotone" 
                        dataKey="clicks" 
-                       stroke="#10B981" 
+                       stroke="hsl(var(--chart-2))" 
                        strokeWidth={3}
-                       strokeDasharray="5 5"
+                       strokeDasharray="8 4"
                        name="Forecast"
                      />
                   </LineChart>
