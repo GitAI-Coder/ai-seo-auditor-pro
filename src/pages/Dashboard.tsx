@@ -577,7 +577,7 @@ const Dashboard = () => {
                        ]}
                        type="monotone" 
                        dataKey="clicks" 
-                       stroke="#EC4899" 
+                       stroke="#10B981" 
                        strokeWidth={3}
                        strokeDasharray="8 4"
                        name="Forecast"
