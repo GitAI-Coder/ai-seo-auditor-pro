@@ -1,0 +1,19 @@
+{
+  "trafficForecast": [
+    { "month": "Jan-25", "actual": 74, "forecast": null },
+    { "month": "Feb-25", "actual": 74, "forecast": null },
+    { "month": "Mar-25", "actual": 133, "forecast": null },
+    { "month": "Apr-25", "actual": 108, "forecast": null },
+    { "month": "May-25", "actual": 157, "forecast": null },
+    { "month": "Jun-25", "actual": 135, "forecast": null },
+    { "month": "Jul-25", "actual": 125, "forecast": null },
+    { "month": "Aug-25", "actual": 113, "forecast": null },
+    { "month": "Sep-25", "actual": 118, "forecast": null },
+    { "month": "Oct-25", "actual": 115, "forecast": null },
+    { "month": "Nov-25", "actual": 130, "forecast": null },
+    { "month": "Dec-25", "actual": 180, "forecast": 180 },
+    { "month": "Jan-26", "actual": null, "forecast": 230 },
+    { "month": "Feb-26", "actual": null, "forecast": 278 },
+    { "month": "Mar-26", "actual": null, "forecast": 355 }
+  ]
+}
