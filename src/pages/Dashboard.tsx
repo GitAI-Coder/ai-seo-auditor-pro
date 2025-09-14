@@ -539,7 +539,7 @@ const Dashboard = () => {
                        tickLine={false}
                      />
                      <YAxis />
-                     <Tooltip formatter={(value, name) => [value, name === 'actual' ? 'Actual Traffic' : 'Forecast']} />
+                     <Tooltip formatter={(value, name) => [value, name === 'actual' ? 'Actual Traffic' : 'Current traffic']} />
                      
                      {/* Actual traffic line */}
                      <Line 
