@@ -528,7 +528,7 @@ const Dashboard = () => {
                      { month: "Mar-26", clicks: 355 }
                    ]}>
                      <CartesianGrid strokeDasharray="3 3" />
-                     <XAxis dataKey="month" angle={-45} textAnchor="end" height={60} fontSize={12} />
+                     <XAxis dataKey="month" angle={-45} textAnchor="end" height={60} fontSize={12} interval={0} ticks={["Jan-25","Feb-25","Mar-25","Apr-25","May-25","Jun-25","Jul-25","Aug-25","Sep-25","Oct-25","Nov-25","Dec-25","Jan-26","Feb-26","Mar-26"]} />
                      <YAxis />
                      <Tooltip />
                      
